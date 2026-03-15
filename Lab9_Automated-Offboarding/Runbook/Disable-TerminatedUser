@@ -1,0 +1,23 @@
+param(
+    [Parameter(Mandatory = $true)]
+    [string]$UserPrincipalName
+)
+
+Write-Output "Starting IAM Offboarding Automation..."
+
+# Connect to Microsoft Graph using Managed Identity
+Connect-MgGraph -Identity
+
+# Get the user
+$user = Get-MgUser -UserId $UserPrincipalName
+
+Write-Output "Disabling user: $UserPrincipalName"
+
+# Disable the user account
+Update-MgUser -UserId $UserPrincipalName -AccountEnabled:$false
+
+# Revoke active sign-in sessions
+Write-Output "Revoking sign-in sessions"
+Revoke-MgUserSignInSession -UserId $UserPrincipalName
+
+Write-Output "User disabled successfully."
