@@ -1,4 +1,4 @@
-# Lab 9 – Automated User Offboarding
+Lab9_JML-Automation/README.md
 
 This lab demonstrates automated identity lifecycle management using Microsoft Entra ID and Azure Automation.
 
