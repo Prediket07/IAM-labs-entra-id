@@ -1,35 +1,62 @@
-# Lab 10 – JML Automation in Microsoft Entra ID
+param(
+    [Parameter(Mandatory=$true)]
+    [string]$UserPrincipalName,
 
-## Overview
-This lab demonstrates a full **Joiner-Mover-Leaver (JML)** identity lifecycle automation workflow using:
+    [Parameter(Mandatory=$true)]
+    [string]$NewDepartment,
 
-- Microsoft Entra ID
-- Azure Automation Runbooks
-- Microsoft Graph PowerShell
-- Webhook triggers
+    [Parameter(Mandatory=$true)]
+    [string]$NewJobTitle
+)
 
-## Scope
+Import-Module Microsoft.Graph.Authentication
+Import-Module Microsoft.Graph.Users
+Import-Module Microsoft.Graph.Groups
 
-### Joiner
-- Create new users
-- Assign department and job title
-- Add users to the correct access group
+Write-Output "Starting Mover Automation"
 
-### Mover
-- Update department and job title
-- Remove old group access
-- Add new group access
+Connect-MgGraph -Identity
 
-### Leaver
-- Disable the user account
-- Revoke active sessions
-- Remove licenses
-- Remove group memberships
+# Get the user
+$user = Get-MgUser -UserId $UserPrincipalName
 
-## Technologies Used
-- Microsoft Entra ID
-- Azure Automation
-- Microsoft Graph
-- PowerShell
-- Managed Identity
-- Webhooks
+# Update user attributes
+Update-MgUser `
+    -UserId $user.Id `
+    -Department $NewDepartment `
+    -JobTitle $NewJobTitle
+
+Write-Output "Updated department to $NewDepartment and title to $NewJobTitle"
+
+# Remove old group membership if moving from Sales
+$oldGroup = Get-MgGroup | Where-Object { $_.DisplayName -eq "GG-Sales" }
+
+if ($oldGroup) {
+    Remove-MgGroupMemberByRef `
+        -GroupId $oldGroup.Id `
+        -DirectoryObjectId $user.Id `
+        -ErrorAction SilentlyContinue
+
+    Write-Output "Removed user from GG-Sales"
+}
+
+# Add new group membership if moving to Finance
+if ($NewDepartment -eq "Finance") {
+
+    $newGroup = Get-MgGroup | Where-Object { $_.DisplayName -eq "GG-Finance" }
+
+    if ($newGroup) {
+        New-MgGroupMemberByRef `
+            -GroupId $newGroup.Id `
+            -BodyParameter @{
+                "@odata.id" = "https://graph.microsoft.com/v1.0/directoryObjects/$($user.Id)"
+            }
+
+        Write-Output "Added user to GG-Finance"
+    }
+    else {
+        Write-Output "Group GG-Finance not found"
+    }
+}
+
+Write-Output "Mover automation completed successfully."
