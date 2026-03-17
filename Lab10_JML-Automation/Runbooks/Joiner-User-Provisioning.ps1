@@ -1,35 +1,58 @@
-# Lab 10 – JML Automation in Microsoft Entra ID
+param(
+    [Parameter(Mandatory=$true)]
+    [string]$FirstName,
 
-## Overview
-This lab demonstrates a full **Joiner-Mover-Leaver (JML)** identity lifecycle automation workflow using:
+    [Parameter(Mandatory=$true)]
+    [string]$LastName,
 
-- Microsoft Entra ID
-- Azure Automation Runbooks
-- Microsoft Graph PowerShell
-- Webhook triggers
+    [Parameter(Mandatory=$true)]
+    [string]$Department,
 
-## Scope
+    [Parameter(Mandatory=$true)]
+    [string]$JobTitle
+)
 
-### Joiner
-- Create new users
-- Assign department and job title
-- Add users to the correct access group
+Import-Module Microsoft.Graph.Authentication
+Import-Module Microsoft.Graph.Users
+Import-Module Microsoft.Graph.Groups
 
-### Mover
-- Update department and job title
-- Remove old group access
-- Add new group access
+Write-Output "Starting Joiner Automation"
 
-### Leaver
-- Disable the user account
-- Revoke active sessions
-- Remove licenses
-- Remove group memberships
+Connect-MgGraph -Identity
 
-## Technologies Used
-- Microsoft Entra ID
-- Azure Automation
-- Microsoft Graph
-- PowerShell
-- Managed Identity
-- Webhooks
+$UserPrincipalName = "$FirstName.$LastName@boclairindustries.com"
+$MailNickname = "$FirstName$LastName"
+
+$newUser = New-MgUser `
+    -DisplayName "$FirstName $LastName" `
+    -UserPrincipalName $UserPrincipalName `
+    -MailNickname $MailNickname `
+    -AccountEnabled:$true `
+    -Department $Department `
+    -JobTitle $JobTitle `
+    -PasswordProfile @{
+        Password = "TempPass123!"
+        ForceChangePasswordNextSignIn = $true
+    }
+
+Write-Output "User created: $UserPrincipalName"
+
+if ($Department -eq "Sales") {
+
+    $group = Get-MgGroup | Where-Object { $_.DisplayName -eq "GG-Sales" }
+
+    if ($group) {
+        New-MgGroupMemberByRef `
+            -GroupId $group.Id `
+            -BodyParameter @{
+                "@odata.id" = "https://graph.microsoft.com/v1.0/directoryObjects/$($newUser.Id)"
+            }
+
+        Write-Output "User added to GG-Sales"
+    }
+    else {
+        Write-Output "Group GG-Sales not found"
+    }
+}
+
+Write-Output "Joiner automation completed successfully."
