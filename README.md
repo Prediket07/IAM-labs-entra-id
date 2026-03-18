@@ -1,132 +1,113 @@
 # Identity & Access Management Labs (Microsoft Entra ID)
 
-This repository documents hands-on Identity and Access Management (IAM) labs built using Microsoft Entra ID (Azure AD). The goal of this project is to demonstrate practical IAM engineering skills including identity lifecycle management, RBAC, conditional access, privileged access, monitoring, and automation.
+## Overview
 
-These labs simulate real enterprise IAM workflows and security practices.
+This repository showcases a structured progression of hands-on labs focused on **Identity and Access Management (IAM)** using Microsoft Entra ID (Azure AD), Azure Automation, and Microsoft Graph.
 
----
+These labs simulate real-world IAM responsibilities including:
 
-# Technologies Used
-
-- Microsoft Entra ID
-- Azure Automation
-- Microsoft Graph
-- PowerShell
-- Conditional Access
-- RBAC
-- Identity Lifecycle Management
-- Privileged Identity Management
-- Identity Monitoring & Auditing
-
----
-
-# IAM Lab Projects
-
-## Lab 0 – Tenant & User Setup
-Configured Entra tenant and created test identities to simulate organizational users.
-
----
-
-## Lab 1 – RBAC Least Privilege
-Implemented role-based access control using the principle of least privilege.
-
-Skills:
-- Role assignment
-- Permission scoping
-- Identity governance
-
----
-
-## Lab 2 – MFA Security Defaults
-Configured MFA security defaults to strengthen identity protection.
-
-Skills:
-- Identity protection
-- MFA enforcement
-- Authentication security
-
----
-
-## Lab 4 – Enterprise Application Access
-Configured SSO and application access management using enterprise applications.
-
-Skills:
-- Application access control
-- SSO configuration
-- User assignment
-
----
-
-## Lab 5 – Joiner / Mover / Leaver Lifecycle
-Simulated identity lifecycle management for onboarding, role changes, and offboarding.
-
-Skills:
-- Identity lifecycle
-- Access updates
-- Role changes
-
----
-
-## Lab 6 – Identity Monitoring & Audit Logs
-Investigated sign-in logs and audit logs to monitor identity activity.
-
-Skills:
-- Log analysis
-- Identity monitoring
-- Security auditing
-
----
-
-## Lab 7 – Conditional Access
-Configured conditional access policies to control access based on security conditions.
-
-Skills:
-- Risk-based authentication
-- Conditional access
-- Identity security
-
----
-
-## Lab 8 – Privileged Access
-Implemented privileged access roles and access governance.
-
-Skills:
+- User provisioning and lifecycle management
+- Role-Based Access Control (RBAC)
+- Multi-Factor Authentication (MFA)
+- Conditional Access policies
 - Privileged access management
-- Administrative role control
-- Least privilege
+- Audit logging and monitoring
+- Automated identity lifecycle workflows (JML)
 
 ---
 
-## Lab 9 – Automated User Offboarding
-Built an automated offboarding workflow using Azure Automation runbooks and Microsoft Graph.
+## Lab Breakdown
 
-Automation workflow:
+### 🔹 Core IAM Foundations
 
-HR Event → Webhook → Azure Automation Runbook → Microsoft Graph → Disable User
+- **Lab0_Tenant-Users**  
+  User creation, tenant structure, and identity basics
 
-Runbook actions:
+- **Lab1_RBAC-Least-Privilege**  
+  Role-Based Access Control and least privilege principles
 
-- Authenticate using Managed Identity
-- Locate user account
-- Disable account
-- Revoke active sessions
+- **Lab2_MFA-Security-Defaults**  
+  MFA implementation and security defaults
 
-Skills demonstrated:
-
-- IAM automation
-- Microsoft Graph scripting
-- Identity lifecycle automation
-- Azure Automation runbooks
+- **Lab4_Enterprise-App-Access**  
+  Application access and enterprise app integration
 
 ---
 
-# Goal of This Repository
+### 🔹 IAM Lifecycle & Monitoring
 
-To demonstrate real-world IAM engineering concepts and practical identity security workflows using Microsoft Entra ID.
+- **Lab5_Joiner-Mover-Leaver**  
+  Manual identity lifecycle management (JML)
 
-This portfolio is intended to showcase hands-on experience relevant to roles such as:
+- **Lab6_Monitoring-Audit**  
+  Logging, monitoring, and audit trails
 
-- Identity & Access Management Analyst
-- IAM Engineer
-- Cloud Identity Engineer
-- Identity Security Engineer
+- **Lab7_Conditional-Access**  
+  Conditional Access policies and enforcement
+
+- **Lab8_Privileged-Access**  
+  Privileged Identity Management (PIM) concepts
+
+---
+
+### 🔹 Automation & Advanced IAM
+
+- **Lab9_Automated-Offboarding**  
+  Automated user offboarding using Azure Automation and Microsoft Graph  
+  - Disable accounts  
+  - Revoke sessions  
+  - Remove licenses  
+  - Remove group memberships  
+
+- **Lab10_JML-Automation** ⭐  
+  Full **Joiner-Mover-Leaver (JML) automation system**  
+  - Automated onboarding (user creation + group assignment)  
+  - Automated role changes (department + access updates)  
+  - Automated offboarding (secure account deprovisioning)  
+  - Webhook-triggered workflows simulating HR systems  
+
+---
+
+## Technologies Used
+
+- Microsoft Entra ID (Azure AD)
+- Azure Automation Runbooks
+- Microsoft Graph PowerShell SDK
+- Managed Identity
+- Webhooks
+- PowerShell
+
+---
+
+## Key Skills Demonstrated
+
+- Identity lifecycle management (JML)
+- Role-Based Access Control (RBAC)
+- Least privilege access design
+- Automation of user provisioning and deprovisioning
+- Secure offboarding practices
+- Cloud identity security
+- Access governance and policy enforcement
+
+---
+
+## Architecture (Lab10 Highlight)
+
+HR System → Webhook → Azure Automation → Microsoft Graph → Entra ID
+
+---
+
+## Purpose
+
+This repository was built to develop hands-on IAM engineering skills and demonstrate practical experience in:
+
+- Automating identity workflows
+- Securing user access across the lifecycle
+- Implementing enterprise IAM concepts in a cloud environment
+
+---
+
+## Author
+
+**Jairus Ross**  
+Aspiring IAM Engineer | Cybersecurity | Microsoft Entra ID | Azure Automation
