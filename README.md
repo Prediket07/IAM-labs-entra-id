@@ -3,7 +3,7 @@
 ### Microsoft Entra ID | Azure Automation | Microsoft Graph | PowerShell
 
 **Jairus Ross** — IAM Engineer  
-📍 CompTIA Security+ | SC-300 (In Progress)  
+📍Joliet, IL | CompTIA Security+ | SC-300 (In Progress)  
 🔗 [LinkedIn](https://www.linkedin.com/in/jairus-ross-5b964a78) | 📧 JairusrossIAM@gmail.com
 
 -----
