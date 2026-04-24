@@ -1,113 +1,173 @@
-# Identity & Access Management Labs (Microsoft Entra ID)
+# Identity & Access Management Portfolio
 
-## Overview
+### Microsoft Entra ID | Azure Automation | Microsoft Graph | PowerShell
 
-This repository showcases a structured progression of hands-on labs focused on **Identity and Access Management (IAM)** using Microsoft Entra ID (Azure AD), Azure Automation, and Microsoft Graph.
+**Jairus Ross** — IAM Engineer  
+📍 CompTIA Security+ | SC-300 (In Progress)  
+🔗 [LinkedIn](https://www.linkedin.com/in/jairus-ross-5b964a78) | 📧 JairusrossIAM@gmail.com
 
-These labs simulate real-world IAM responsibilities including:
+-----
 
-- User provisioning and lifecycle management
-- Role-Based Access Control (RBAC)
-- Multi-Factor Authentication (MFA)
-- Conditional Access policies
-- Privileged access management
-- Audit logging and monitoring
-- Automated identity lifecycle workflows (JML)
+## About This Repository
 
----
+This repository documents a structured, hands-on IAM engineering portfolio built in a live Microsoft Entra ID tenant using a Microsoft 365 Business Premium trial environment.
 
-## Lab Breakdown
+Every lab in this repository reflects a real enterprise scenario — not a tutorial exercise. Each one was built around the question: *what would an IAM engineer actually be asked to do on day one?*
 
-### 🔹 Core IAM Foundations
+The progression moves deliberately from identity foundations through lifecycle management, access governance, and full automation — mirroring the growth path of an IAM engineer from provisioning specialist to automation architect.
 
-- **Lab0_Tenant-Users**  
-  User creation, tenant structure, and identity basics
+**This portfolio demonstrates:**
 
-- **Lab1_RBAC-Least-Privilege**  
-  Role-Based Access Control and least privilege principles
+- Hands-on experience with Microsoft Entra ID across the full IAM lifecycle
+- PowerShell scripting using the Microsoft Graph SDK for repeatable, auditable identity operations
+- End-to-end automation of Joiner-Mover-Leaver workflows using Azure Automation and webhooks
+- Security-first thinking: least privilege, just-in-time access, session revocation, and policy enforcement
+- Documentation discipline — every lab written to enterprise standards, not student notes
 
-- **Lab2_MFA-Security-Defaults**  
-  MFA implementation and security defaults
+-----
 
-- **Lab4_Enterprise-App-Access**  
-  Application access and enterprise app integration
+## Certifications
 
----
+|Certification                                       |Status       |Issuer   |
+|----------------------------------------------------|-------------|---------|
+|CompTIA Security+                                   |✅ Earned     |CompTIA  |
+|Microsoft SC-300 (Identity and Access Administrator)|🔄 In Progress|Microsoft|
 
-### 🔹 IAM Lifecycle & Monitoring
+-----
 
-- **Lab5_Joiner-Mover-Leaver**  
-  Manual identity lifecycle management (JML)
+## Lab Overview
 
-- **Lab6_Monitoring-Audit**  
-  Logging, monitoring, and audit trails
+### 🔹 Foundation Track — Identity Infrastructure
 
-- **Lab7_Conditional-Access**  
-  Conditional Access policies and enforcement
+|Lab                                   |Title                                  |Key Skills                                                 |
+|--------------------------------------|---------------------------------------|-----------------------------------------------------------|
+|[Lab 0](./Lab0_Tenant-Users/)         |Tenant Setup & User Identity Foundation|Tenant configuration, user provisioning, license assignment|
+|[Lab 1](./Lab1_RBAC-Least-Privilege/) |RBAC & Least Privilege Access          |Role assignments, least privilege, Entra ID vs Azure RBAC  |
+|[Lab 2](./Lab2_MFA-Security-Defaults/)|MFA Implementation & Security Defaults |MFA enforcement, Security Defaults, authentication methods |
+|[Lab 4](./Lab4_Enterprise-App-Access/)|Enterprise Application Access & SSO    |SSO (SAML/OIDC), app assignment, access control            |
 
-- **Lab8_Privileged-Access**  
-  Privileged Identity Management (PIM) concepts
+-----
 
----
+### 🔹 Lifecycle & Governance Track
 
-### 🔹 Automation & Advanced IAM
+|Lab                                 |Title                               |Key Skills                                                   |
+|------------------------------------|------------------------------------|-------------------------------------------------------------|
+|[Lab 5](./Lab5_Joiner-Mover-Leaver/)|JML Identity Lifecycle (Manual)     |Full JML process, user transitions, deprovisioning           |
+|[Lab 6](./Lab6_Monitoring-Audit/)   |Identity Monitoring & Audit Logs    |Audit logs, sign-in analysis, diagnostic settings, log export|
+|[Lab 7](./Lab7_Conditional-Accesss/)|Conditional Access Policy Design    |CA policies, named locations, What If tool, risk-based access|
+|[Lab 8](./Lab8_Privileged-Access/)  |Privileged Identity Management (PIM)|JIT access, eligible assignments, approval workflows         |
 
-- **Lab9_Automated-Offboarding**  
-  Automated user offboarding using Azure Automation and Microsoft Graph  
-  - Disable accounts  
-  - Revoke sessions  
-  - Remove licenses  
-  - Remove group memberships  
+-----
 
-- **Lab10_JML-Automation** ⭐  
-  Full **Joiner-Mover-Leaver (JML) automation system**  
-  - Automated onboarding (user creation + group assignment)  
-  - Automated role changes (department + access updates)  
-  - Automated offboarding (secure account deprovisioning)  
-  - Webhook-triggered workflows simulating HR systems  
+### 🔹 Automation Track — IAM Engineering
 
----
+|Lab                                          |Title                           |Key Skills                                                |
+|---------------------------------------------|--------------------------------|----------------------------------------------------------|
+|[Lab 9](./Lab9_Automated-Offboarding/)       |Automated Offboarding           |Azure Automation, Managed Identity, Graph API, runbooks   |
+|[Lab 10](./Lab10_JML-Automation/)            |Full JML Automation System ⭐    |Webhook triggers, end-to-end JML automation, JSON payloads|
+|[Policy Framework](./IAM-Policy-Enforcement/)|IAM Policy Enforcement Framework|Policy inventory, compliance validation, Secure Score     |
+
+-----
+
+## Capstone: JML Automation Architecture (Lab 10)
+
+The most advanced lab in this portfolio simulates a production-grade identity automation system triggered by HR workflows:
+
+```
+HR System (Workday/SAP simulation)
+        │
+        ▼
+   Webhook (HTTP POST)
+        │
+        ▼
+Azure Automation Runbook
+        │
+   ┌────┴────┐────────┐
+   ▼         ▼        ▼
+JOINER    MOVER    LEAVER
+   │         │        │
+   └────┬────┘────────┘
+        ▼
+Microsoft Graph API
+        │
+        ▼
+  Microsoft Entra ID
+  (User created/updated/disabled,
+   licenses assigned/removed,
+   groups managed, sessions revoked)
+        │
+        ▼
+  Audit Log + Output Report
+```
+
+**What this demonstrates to an employer:**
+
+- Ability to design and build identity automation pipelines, not just run manual tasks
+- Understanding of Managed Identity as a secure, credential-free auth pattern
+- Microsoft Graph as the single API surface for all Entra ID operations
+- Production thinking: error handling, structured logging, JSON schema design
+
+-----
 
 ## Technologies Used
 
-- Microsoft Entra ID (Azure AD)
-- Azure Automation Runbooks
-- Microsoft Graph PowerShell SDK
-- Managed Identity
-- Webhooks
-- PowerShell
+|Technology                    |Usage                                                |
+|------------------------------|-----------------------------------------------------|
+|Microsoft Entra ID (Azure AD) |Core identity platform across all labs               |
+|Microsoft Graph PowerShell SDK|Scripted identity operations and automation          |
+|Azure Automation              |Runbook hosting and execution environment            |
+|Managed Identity              |Secure, credential-free authentication for automation|
+|Webhooks                      |HR system simulation and runbook triggering          |
+|PowerShell                    |Primary scripting language throughout                |
+|Microsoft 365                 |Live tenant environment for all lab work             |
 
----
+-----
 
-## Key Skills Demonstrated
+## Skills Demonstrated
 
-- Identity lifecycle management (JML)
-- Role-Based Access Control (RBAC)
-- Least privilege access design
-- Automation of user provisioning and deprovisioning
-- Secure offboarding practices
-- Cloud identity security
-- Access governance and policy enforcement
+**Identity Administration**
 
----
+- User provisioning, attribute management, license assignment
+- Group creation and dynamic membership
+- Identity lifecycle management (Joiner, Mover, Leaver)
 
-## Architecture (Lab10 Highlight)
+**Access Control & Security**
 
-HR System → Webhook → Azure Automation → Microsoft Graph → Entra ID
+- Role-Based Access Control (RBAC) with least privilege
+- Conditional Access policy design and enforcement
+- Multi-Factor Authentication implementation
+- Privileged Identity Management (PIM) — just-in-time access
 
----
+**Automation & Engineering**
 
-## Purpose
+- PowerShell scripting with Microsoft Graph SDK
+- Azure Automation runbook development
+- Webhook-triggered identity workflows
+- Managed Identity configuration and permissions
 
-This repository was built to develop hands-on IAM engineering skills and demonstrate practical experience in:
+**Monitoring & Governance**
 
-- Automating identity workflows
-- Securing user access across the lifecycle
-- Implementing enterprise IAM concepts in a cloud environment
+- Audit log analysis and export
+- Sign-in log investigation
+- Diagnostic settings and Log Analytics integration
+- IAM policy inventory and compliance validation
 
----
+-----
 
-## Author
+## Lab Environment
 
-**Jairus Ross**  
-Aspiring IAM Engineer | Cybersecurity | Microsoft Entra ID | Azure Automation
+All labs were performed in a live Microsoft Entra ID tenant with Microsoft 365 Business Premium licensing. Configurations, scripts, and outputs have been sanitized to remove all tenant-specific identifiers (tenant IDs, object IDs, UPNs) before publication.
+
+-----
+
+## Why IAM Engineering
+
+Identity is the new perimeter. In a cloud-first world, every breach starts with a compromised credential or an over-privileged account. IAM engineers are the people who close those gaps before they become incidents.
+
+My path into IAM comes through Security+ certification, hands-on lab work in a live Entra ID tenant, and a deliberate focus on automation — because manually managing identity at enterprise scale isn’t sustainable, and the engineers who can automate it are the ones organizations want to keep.
+
+I’m pursuing the SC-300 certification to formalize what I’ve built in this portfolio, and targeting IAM engineer roles where I can contribute from day one while continuing to grow toward IAM architecture.
+
+-----
+
+*All lab content is original work performed in a personal Microsoft 365 trial tenant. Scripts are provided for educational and portfolio purposes.*
