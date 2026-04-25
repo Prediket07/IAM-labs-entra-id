@@ -3,7 +3,7 @@
 ### Microsoft Entra ID | Azure Automation | Microsoft Graph | PowerShell
 
 **Jairus Ross** — IAM Engineer  
-📍Joliet, IL | CompTIA Security+ | SC-300 (In Progress)  
+📍 CompTIA Security+ | SC-300 (In Progress)  
 🔗 [LinkedIn](https://www.linkedin.com/in/jairus-ross-5b964a78) | 📧 JairusrossIAM@gmail.com
 
 -----
@@ -44,6 +44,7 @@ The progression moves deliberately from identity foundations through lifecycle m
 |[Lab 0](./Lab0_Tenant-Users/)         |Tenant Setup & User Identity Foundation|Tenant configuration, user provisioning, license assignment|
 |[Lab 1](./Lab1_RBAC-Least-Privilege/) |RBAC & Least Privilege Access          |Role assignments, least privilege, Entra ID vs Azure RBAC  |
 |[Lab 2](./Lab2_MFA-Security-Defaults/)|MFA Implementation & Security Defaults |MFA enforcement, Security Defaults, authentication methods |
+|[Lab 3](./Lab3_SSPR/)                 |Self-Service Password Reset (SSPR)     |SSPR configuration, authentication methods, staged rollout |
 |[Lab 4](./Lab4_Enterprise-App-Access/)|Enterprise Application Access & SSO    |SSO (SAML/OIDC), app assignment, access control            |
 
 -----
@@ -54,18 +55,26 @@ The progression moves deliberately from identity foundations through lifecycle m
 |------------------------------------|------------------------------------|-------------------------------------------------------------|
 |[Lab 5](./Lab5_Joiner-Mover-Leaver/)|JML Identity Lifecycle (Manual)     |Full JML process, user transitions, deprovisioning           |
 |[Lab 6](./Lab6_Monitoring-Audit/)   |Identity Monitoring & Audit Logs    |Audit logs, sign-in analysis, diagnostic settings, log export|
-|[Lab 7](./Lab7_Conditional-Accesss/)|Conditional Access Policy Design    |CA policies, named locations, What If tool, risk-based access|
+|[Lab 7](./Lab7_Conditional-Access/) |Conditional Access Policy Design    |CA policies, named locations, What If tool, risk-based access|
 |[Lab 8](./Lab8_Privileged-Access/)  |Privileged Identity Management (PIM)|JIT access, eligible assignments, approval workflows         |
 
 -----
 
 ### 🔹 Automation Track — IAM Engineering
 
-|Lab                                          |Title                           |Key Skills                                                |
-|---------------------------------------------|--------------------------------|----------------------------------------------------------|
-|[Lab 9](./Lab9_Automated-Offboarding/)       |Automated Offboarding           |Azure Automation, Managed Identity, Graph API, runbooks   |
-|[Lab 10](./Lab10_JML-Automation/)            |Full JML Automation System ⭐    |Webhook triggers, end-to-end JML automation, JSON payloads|
-|[Policy Framework](./IAM-Policy-Enforcement/)|IAM Policy Enforcement Framework|Policy inventory, compliance validation, Secure Score     |
+|Lab                                   |Title                       |Key Skills                                                |
+|--------------------------------------|----------------------------|----------------------------------------------------------|
+|[Lab 9](./Lab9_Automated-Offboarding/)|Automated Offboarding       |Azure Automation, Managed Identity, Graph API, runbooks   |
+|[Lab 10](./Lab10_JML-Automation/)     |Full JML Automation System ⭐|Webhook triggers, end-to-end JML automation, JSON payloads|
+
+-----
+
+### 🔹 Identity Governance Track
+
+|Lab                                          |Title                                   |Key Skills                                                   |
+|---------------------------------------------|----------------------------------------|-------------------------------------------------------------|
+|[Lab 11](./Lab11_Entitlement-Management/)    |Entitlement Management & Access Packages|Catalogs, access packages, approval workflows, access reviews|
+|[Policy Framework](./IAM-Policy-Enforcement/)|IAM Policy Enforcement Framework        |Policy inventory, compliance validation, Secure Score        |
 
 -----
 
