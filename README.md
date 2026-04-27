@@ -71,10 +71,13 @@ The progression moves deliberately from identity foundations through lifecycle m
 
 ### 🔹 Identity Governance Track
 
-|Lab                                          |Title                                   |Key Skills                                                   |
-|---------------------------------------------|----------------------------------------|-------------------------------------------------------------|
-|[Lab 11](./Lab11_Entitlement-Management/)    |Entitlement Management & Access Packages|Catalogs, access packages, approval workflows, access reviews|
-|[Policy Framework](./IAM-Policy-Enforcement/)|IAM Policy Enforcement Framework        |Policy inventory, compliance validation, Secure Score        |
+|Lab                                          |Title                                   |Key Skills                                                                           |
+|---------------------------------------------|----------------------------------------|-------------------------------------------------------------------------------------|
+|[Lab 11](./Lab11_Entitlement-Management/)    |Entitlement Management & Access Packages|Catalogs, access packages, approval workflows, access reviews                        |
+|[Lab 12](./Lab12_Access-Reviews/)            |Access Reviews — Standalone Group Review|Recurring access reviews, auto-apply, decision helpers, compliance enforcement       |
+|[Lab 13](./Lab13_Identity-Protection/)       |Identity Protection & Risk Policies     |Sign-in risk, user risk, break-glass accounts, report-only mode, risk detections     |
+|[Lab 14](./Lab14_App-Registrations/)         |App Registrations & API Permissions     |App registration, delegated vs application permissions, client secrets, admin consent|
+|[Policy Framework](./IAM-Policy-Enforcement/)|IAM Policy Enforcement Framework        |Policy inventory, compliance validation, Secure Score                                |
 
 -----
 
