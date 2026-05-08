@@ -9,4 +9,4 @@ passwords without contacting the help desk.
 - Registration required on next sign-in
 - Notifications: Users notified on reset, admins notified when 
   other admins reset
-
+  
