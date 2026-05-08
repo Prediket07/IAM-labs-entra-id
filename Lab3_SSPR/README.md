@@ -10,4 +10,3 @@ passwords without contacting the help desk.
 - Notifications: Users notified on reset, admins notified when 
   other admins reset
 
-![SSPR Notifications](./sspr-notifications.png)
