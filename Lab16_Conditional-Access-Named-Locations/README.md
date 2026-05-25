@@ -3,95 +3,101 @@
 **Platform:** Microsoft Entra ID  
 **Tenant:** Boclair Industries  
 **Engineer:** Jairus Ross  
-**Date Completed:** May 2026
+**Date Completed:** May 25, 2026
 
------
+---
 
 ## Scenario
 
-Boclair Industries needs to enforce location-based access controls to reduce the risk of unauthorized sign-ins from untrusted networks. As the IAM Engineer, I was tasked with creating a trusted named location representing the company headquarters IP address, then building a Conditional Access policy that requires MFA for any sign-in originating outside that trusted location.
+Boclair Industries needs to enforce location-based access controls to reduce 
+the risk of unauthorized sign-ins from untrusted networks. As the IAM Engineer, 
+I implemented two phases of location-based Conditional Access — first restricting 
+access by country, then tightening controls to a specific trusted office IP range.
 
------
+---
 
 ## Objectives
 
-- Create a named location in Entra ID representing a trusted IP range
-- Mark the location as trusted
-- Build a Conditional Access policy using the named location as a condition
-- Verify the policy is configured correctly in report-only mode before enforcement
+- Create a Countries-based named location and enforce MFA outside the US
+- Create an IP ranges named location marked as trusted
+- Build a second CA policy enforcing MFA outside the trusted office IP
+- Exclude the admin account from policies to prevent lockout
 
------
+---
 
 ## Steps Performed
 
-### Step 1 — Create a Named Location
+### Phase 1 — Country-Based Location Control
 
-Navigated to: **Entra ID → Security → Conditional Access → Named locations**
+**Named Location: Boclair Industries HQ**
+- Type: Countries
+- Countries selected: United States
+- Trusted: No (Countries type cannot be marked trusted)
 
-Clicked **+ IP ranges location** and configured:
+**CA Policy: Require MFA Outside US**
+- Users: All users
+- Target resources: All resources
+- Network — Include: Any network or location
+- Network — Exclude: Boclair Industries HQ
+- Grant: Require MFA
+- State: On
 
-- **Name:** Boclair Industries HQ
-- **IP ranges:** Current public IP address in CIDR /32 format
-- **Marked as trusted location:** Yes
+> **Why this matters:** Country-based location control is a broad first layer — 
+blocking or challenging sign-ins from outside approved geographies. Useful for 
+organizations that only operate in specific countries.
 
-Saved the named location successfully.
+---
 
-> **Why this matters:** Named locations define trusted network boundaries. Marking a location as trusted allows Conditional Access policies to differentiate between sign-ins from known safe networks vs unknown or risky ones.
+### Phase 2 — IP Range Trusted Location Control
 
------
+**Named Location: Boclair Trusted Office**
+- Type: IP ranges
+- IP range: 104.28.103.102/32
+- Marked as trusted location: Yes
 
-### Step 2 — Create a Conditional Access Policy
+**CA Policy: Require MFA Outside Trusted Office**
+- Users: All users
+- Excluded users: JairusRoss@Boclairindustries.com
+- Target resources: All resources
+- Network — Include: Any network or location
+- Network — Exclude: Boclair Trusted Office
+- Grant: Require MFA
+- State: On
 
-Navigated to: **Entra ID → Security → Conditional Access → Policies → + New policy**
+> **Why this matters:** IP-based trusted locations are more precise than 
+country-based controls. Marking the location as trusted also feeds into 
+Identity Protection risk scoring — sign-ins from trusted IPs carry lower 
+risk. The admin exclusion prevents self-lockout, a real-world best practice.
 
-Configured the policy with:
-
-- **Name:** Require MFA Outside HQ
-- **Users:** All users
-- **Target resources:** All cloud apps
-- **Conditions → Locations:** Excluded “Boclair Industries HQ” (trusted), included “Any location”
-- **Grant:** Require multi-factor authentication
-- **Enable policy:** Report-only (for safe testing)
-
-Saved the policy successfully.
-
-> **Why this matters:** Excluding the trusted HQ location means users signing in from the office IP are not prompted for MFA. Anyone signing in from anywhere else — home, coffee shop, foreign country — must complete MFA. This enforces Zero Trust principles without adding friction for on-site users.
-
------
-
-### Step 3 — Verify Policy Configuration
-
-Used the **Conditional Access What If tool** to simulate sign-ins:
-
-- Simulated sign-in from trusted HQ IP — policy did not apply MFA requirement
-- Simulated sign-in from unknown location — policy applied MFA requirement
-
-Confirmed policy behavior matched expected design.
-
-> **Why this matters:** The What If tool validates policy logic before enabling enforcement, preventing accidental lockouts or unintended access grants.
-
------
+---
 
 ## Key Concepts Demonstrated
 
-- **Named locations:** Define trusted IP ranges or countries used as conditions in Conditional Access policies
-- **Trusted location flag:** Marks a named location as trusted — used by Identity Protection and Conditional Access to assess sign-in risk
-- **Location condition in CA:** Policies can include or exclude specific named locations to apply controls only where needed
-- **Report-only mode:** Allows testing of CA policy impact without enforcing it on real users — best practice before going live
-- **What If tool:** Simulates sign-in scenarios to validate which CA policies would apply — critical troubleshooting tool
-- **Zero Trust principle:** Never trust, always verify — location-based MFA enforcement is a direct application of this model
+- **Countries vs IP ranges:** Two distinct named location types — countries 
+  for broad geographic control, IP ranges for precise network-level control
+- **Trusted location flag:** Only available on IP ranges type — lowers risk 
+  score in Identity Protection for sign-ins from that network
+- **Layered CA policies:** Multiple policies can coexist and stack — each 
+  evaluated independently at sign-in
+- **Admin exclusion:** Always exclude at least one admin account from CA 
+  policies to prevent lockout
+- **Zero Trust:** Never trust, always verify — location-based MFA is a 
+  direct application of this model
 
------
+---
 
 ## Tools Used
 
 - Microsoft Entra Admin Center
 - Conditional Access — Named Locations
 - Conditional Access — Policies
-- Conditional Access — What If tool
 
------
+---
 
 ## Outcome
 
-Successfully created a trusted named location for Boclair Industries HQ and built a Conditional Access policy enforcing MFA for all sign-ins originating outside the trusted network. Lab demonstrates real-world location-based access control implementation aligned with Zero Trust security principles.
+Successfully implemented two phases of location-based Conditional Access. 
+Phase 1 enforces MFA outside the United States. Phase 2 enforces MFA outside 
+the trusted office IP range. Both policies active in BoclairIndustries tenant. 
+Lab demonstrates layered, real-world location-based access control aligned 
+with Zero Trust principles.
