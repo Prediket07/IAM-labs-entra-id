@@ -10,11 +10,11 @@
 
 ## About This Repository
 
-This repository documents a structured, hands-on IAM engineering portfolio built in a live Microsoft Entra ID tenant using a Microsoft 365 Business Premium trial environment.
+This repository documents a structured, hands-on IAM engineering portfolio built in a live Microsoft Entra ID tenant using a Microsoft 365 E5 environment.
 
 Every lab in this repository reflects a real enterprise scenario — not a tutorial exercise. Each one was built around the question: *what would an IAM engineer actually be asked to do on day one?*
 
-The progression moves deliberately from identity foundations through lifecycle management, access governance, and full automation — mirroring the growth path of an IAM engineer from provisioning specialist to automation architect.
+The progression moves deliberately from identity foundations through lifecycle management, access governance, authentication protocols, and full automation — mirroring the growth path of an IAM engineer from provisioning specialist to automation architect.
 
 **This portfolio demonstrates:**
 
@@ -22,6 +22,8 @@ The progression moves deliberately from identity foundations through lifecycle m
 - PowerShell scripting using the Microsoft Graph SDK for repeatable, auditable identity operations
 - End-to-end automation of Joiner-Mover-Leaver workflows using Azure Automation and webhooks
 - Security-first thinking: least privilege, just-in-time access, session revocation, and policy enforcement
+- Deep understanding of modern authentication protocols: OAuth 2.0, OpenID Connect, SAML, WS-Federation
+- Emergency access planning and break glass account hardening
 - Documentation discipline — every lab written to enterprise standards, not student notes
 
 -----
@@ -75,9 +77,22 @@ The progression moves deliberately from identity foundations through lifecycle m
 |---------------------------------------------|----------------------------------------|-------------------------------------------------------------------------------------|
 |[Lab 11](./Lab11_Entitlement-Management/)    |Entitlement Management & Access Packages|Catalogs, access packages, approval workflows, access reviews                        |
 |[Lab 12](./Lab12_Access-Reviews/)            |Access Reviews — Standalone Group Review|Recurring access reviews, auto-apply, decision helpers, compliance enforcement       |
-|[Lab 13](./Lab13_Identity-Protection/)       |Identity Protection & Risk Policies     |Sign-in risk, user risk, break-glass accounts, report-only mode, risk detections     |
+|[Lab 13](./Lab13_Identity-Protection/)       |Identity Protection & Risk Policies     |Sign-in risk, user risk, risk detections, report-only mode                           |
 |[Lab 14](./Lab14_App-Registrations/)         |App Registrations & API Permissions     |App registration, delegated vs application permissions, client secrets, admin consent|
 |[Policy Framework](./IAM-Policy-Enforcement/)|IAM Policy Enforcement Framework        |Policy inventory, compliance validation, Secure Score                                |
+
+-----
+
+### 🔹 Advanced Identity Track — External Access, Protocols & Security
+
+|Lab                                                |Title                                         |Key Skills                                                                                        |
+|---------------------------------------------------|----------------------------------------------|--------------------------------------------------------------------------------------------------|
+|[Lab 15](./Lab15_B2B-External-Collaborations/)     |B2B External Collaborations                   |External Collaboration Settings, Connected Organizations, Cross-tenant access, B2B direct connect |
+|[Lab 16](./Lab16_Conditional-Access-Named-L.../)   |Conditional Access — Named Locations          |Named locations, trusted IPs, location-based CA policy enforcement                               |
+|[Lab 17](./Lab17_PIM-Role-with-MFA-and-App.../)    |PIM Role Activation with MFA & Approval       |PIM eligible roles, activation requirements, MFA on activation, approval workflows               |
+|[Lab 18](./Lab18_Access-Package-with-Conne.../)    |Access Package with Connected Organization    |Entitlement Management, Connected Organization, external user access packages                    |
+|[Lab 19](./LAB19_OIDC-&-OAuth-2.0-Authentic.../)  |OIDC & OAuth 2.0 Authentication Flows ⭐       |OAuth 2.0, OpenID Connect, Implicit Flow, Authorization Code Flow, JWT token analysis            |
+|[Lab 20](./Lab20_Break-Glass-Account-Config.../)   |Break Glass Account Configuration ⭐           |Emergency access accounts, CA exclusions, onmicrosoft.com domain, Identity Protection alerts     |
 
 -----
 
@@ -121,17 +136,34 @@ Microsoft Graph API
 
 -----
 
+## Featured Labs
+
+### Lab 19 — OIDC & OAuth 2.0 Authentication Flows
+End-to-end demonstration of modern authentication protocols in a live Entra ID tenant. Built and executed OIDC Implicit Flow and Authorization Code Flow URLs manually, decoded real JWT ID tokens, analyzed all claims (aud, iss, nonce, email, name, oid, tid), and documented the security rationale behind each flow type. Confirmed CORS enforcement on Step 2 of Authorization Code Flow as proof of the server-side-only token exchange security model.
+
+**Key concepts demonstrated:** OAuth 2.0 vs OIDC, access tokens vs ID tokens, Implicit Flow vs Authorization Code Flow, JWT structure, redirect URI security, client secrets, implicit grant settings.
+
+### Lab 20 — Break Glass Account Configuration
+Full emergency access account implementation following Microsoft best practice guidance. Created two cloud-only break glass accounts on the onmicrosoft.com domain, assigned permanent Global Administrator, excluded both from all Conditional Access policies, and configured Identity Protection alerting as a compensating control. Documented the production monitoring gap and operational procedures.
+
+**Key concepts demonstrated:** Emergency access planning, onmicrosoft.com domain rationale, Active vs Eligible PIM assignment, CA exclusion strategy, federation failure scenarios, break glass operational procedures.
+
+-----
+
 ## Technologies Used
 
-|Technology                    |Usage                                                |
-|------------------------------|-----------------------------------------------------|
-|Microsoft Entra ID (Azure AD) |Core identity platform across all labs               |
-|Microsoft Graph PowerShell SDK|Scripted identity operations and automation          |
-|Azure Automation              |Runbook hosting and execution environment            |
-|Managed Identity              |Secure, credential-free authentication for automation|
-|Webhooks                      |HR system simulation and runbook triggering          |
-|PowerShell                    |Primary scripting language throughout                |
-|Microsoft 365                 |Live tenant environment for all lab work             |
+|Technology                    |Usage                                                      |
+|------------------------------|-----------------------------------------------------------|
+|Microsoft Entra ID (Azure AD) |Core identity platform across all labs                     |
+|Microsoft Graph PowerShell SDK|Scripted identity operations and automation                |
+|Azure Automation              |Runbook hosting and execution environment                  |
+|Managed Identity              |Secure, credential-free authentication for automation      |
+|Webhooks                      |HR system simulation and runbook triggering                |
+|PowerShell                    |Primary scripting language throughout                      |
+|Microsoft 365 E5              |Live tenant environment for all lab work                   |
+|OAuth 2.0 / OpenID Connect    |Modern authentication protocol implementation and analysis |
+|JWT (JSON Web Tokens)         |Token structure analysis and claims mapping                |
+|SAML / WS-Federation          |Legacy federation protocol understanding and migration     |
 
 -----
 
@@ -142,6 +174,7 @@ Microsoft Graph API
 - User provisioning, attribute management, license assignment
 - Group creation and dynamic membership
 - Identity lifecycle management (Joiner, Mover, Leaver)
+- Break glass account configuration and emergency access planning
 
 **Access Control & Security**
 
@@ -149,6 +182,15 @@ Microsoft Graph API
 - Conditional Access policy design and enforcement
 - Multi-Factor Authentication implementation
 - Privileged Identity Management (PIM) — just-in-time access
+- B2B external collaboration and cross-tenant access configuration
+
+**Authentication & Protocols**
+
+- OAuth 2.0 authorization flows (Implicit, Authorization Code)
+- OpenID Connect identity layer and JWT token analysis
+- SAML and WS-Federation federation protocols
+- App registration configuration (redirect URIs, client secrets, permissions)
+- Delegated vs application permission models
 
 **Automation & Engineering**
 
@@ -161,6 +203,7 @@ Microsoft Graph API
 
 - Audit log analysis and export
 - Sign-in log investigation
+- Identity Protection risk policies and alerting
 - Diagnostic settings and Log Analytics integration
 - IAM policy inventory and compliance validation
 
@@ -168,7 +211,7 @@ Microsoft Graph API
 
 ## Lab Environment
 
-All labs were performed in a live Microsoft Entra ID tenant with Microsoft 365 Business Premium licensing. Configurations, scripts, and outputs have been sanitized to remove all tenant-specific identifiers (tenant IDs, object IDs, UPNs) before publication.
+All labs were performed in a live Microsoft Entra ID tenant (Boclair Industries) with Microsoft 365 E5 licensing. Configurations, scripts, and outputs have been sanitized to remove all tenant-specific identifiers (tenant IDs, object IDs, UPNs) before publication.
 
 -----
 
@@ -176,10 +219,10 @@ All labs were performed in a live Microsoft Entra ID tenant with Microsoft 365 B
 
 Identity is the new perimeter. In a cloud-first world, every breach starts with a compromised credential or an over-privileged account. IAM engineers are the people who close those gaps before they become incidents.
 
-My path into IAM comes through Security+ certification, hands-on lab work in a live Entra ID tenant, and a deliberate focus on automation — because manually managing identity at enterprise scale isn’t sustainable, and the engineers who can automate it are the ones organizations want to keep.
+My path into IAM comes through Security+ certification, 20 hands-on labs in a live Entra ID tenant, and a deliberate focus on automation — because manually managing identity at enterprise scale isn't sustainable, and the engineers who can automate it are the ones organizations want to keep.
 
-I’m pursuing the SC-300 certification to formalize what I’ve built in this portfolio, and targeting IAM engineer roles where I can contribute from day one while continuing to grow toward IAM architecture.
+I'm pursuing the SC-300 certification to formalize what I've built in this portfolio, and targeting IAM engineer roles where I can contribute from day one while continuing to grow toward IAM architecture.
 
 -----
 
-*All lab content is original work performed in a personal Microsoft 365 trial tenant. Scripts are provided for educational and portfolio purposes.*
+*All lab content is original work performed in a personal Microsoft 365 E5 tenant. Scripts are provided for educational and portfolio purposes.*
